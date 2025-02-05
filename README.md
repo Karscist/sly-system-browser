@@ -2,7 +2,7 @@
 
 This is Smalltalk-like browser for Common Lisp!
 
-[Originally written by mmonotone for SLIME]("https://github.com/mmontone/lisp-system-browser"), ported to Sly for all the REPL cat enjoyers out there.
+[Originally written by mmonotone for SLIME](https://github.com/mmontone/lisp-system-browser), ported to Sly for all the REPL cat enjoyers out there.
 
 NOTE THAT THIS IS VERY MUCH WORK IN PROGRESS AT THIS MOMENT. DOUBLY SO WITH THE PORT
 
