@@ -74,7 +74,7 @@ Return value is an alist with keys 'source, 'file, 'position, 'documentation"))
 ;;--------- Settings ---------------------------------
 
 (defgroup system-browser nil
-  "System browser configuration"
+  "System browser configuration."
   :group 'applications)
 
 (defcustom ssb:show-documentation-buffer nil
@@ -110,7 +110,7 @@ Return value is an alist with keys 'source, 'file, 'position, 'documentation"))
     (((background dark))
      :foreground "white"
      :height 0.9))
-  "Face for system-browser definitions list items"
+  "Face for system-browser definitions list items."
   :group 'system-browser-faces)
 
 (defface ssb:mode-line-buttons-face
@@ -120,12 +120,12 @@ Return value is an alist with keys 'source, 'file, 'position, 'documentation"))
     (((background dark))
      :box (:line-width 2 :color "dark grey")
      :background "black" :foreground "white"))
-  "Face for system-browser buttons in mode-line"
+  "Face for system-browser buttons in mode-line."
   :group 'system-browser-faces)
 
 (defface ssb:definitions-list-header-face
   '((t :inherit bold))
-  "Face for system-browser definitions list headers"
+  "Face for system-browser definitions list headers."
   :group 'system-browser-faces)
 
 ;;-------- Buffers ---------------------------------
@@ -314,7 +314,7 @@ Return value is an alist with keys 'source, 'file, 'position, 'documentation"))
 
       ;; Check for unsaved changes in definition buffer
       (when (buffer-modified-p)
-        (when (not (yes-or-no-p "System Browser definition buffer modified. Discard changes? "))
+        (when (not (yes-or-no-p "System Browser definition buffer modified.  Discard changes? "))
           (cl-return-from func)))
 
       ;; For some reason, sometimes definition buffer sets to read-only.
@@ -402,7 +402,7 @@ Return value is an alist with keys 'source, 'file, 'position, 'documentation"))
   (ssb:set-windows-dedicated))
 
 (defun ssb:system-browser-initialize ()
-  ;; Initialize system browser buffers
+   "Initialize system browser buffers."
   (ssb:initialize-modules-buffer)
   (ssb:initialize-categories-buffer)
   (ssb:initialize-definitions-buffer)
@@ -430,7 +430,7 @@ Return value is an alist with keys 'source, 'file, 'position, 'documentation"))
 ;;------- Commands ------------------------------------------------
 
 (defun system-browser-reset-layout ()
-  "Reset system browser layout. Use this when Emacs windows break the browser's layout."
+  "Reset system browser layout.  Use this when Emacs windows break the browser's layout."
   (interactive)
   (wlf:reset-window-sizes ssb:wm)
   (ssb:initialize-windows))
@@ -450,12 +450,12 @@ Return value is an alist with keys 'source, 'file, 'position, 'documentation"))
   (wlf:clear-windows ssb:wm t))
 
 (defun system-browser-browse-module (module-name)
-  "Browse a particular module completed from command bar."
+  "Browse a particular module completed from command bar.  MODULE-NAME."
   (interactive (list (ssb:read-module-name ssb:current-browser-system "Browse module: ")))
   (ssb:select-module module-name))
 
 (defun system-browser-browse-definition (definition-name)
-  "Browse a definition in current module and category."
+  "Browse a definition in current module and category.  DEFINITION-NAME."
   (interactive (list (completing-read (format "Browse definition in %s %s: "
                                               (ssb:selected-module ssb:current-browser-system)
                                               (ssb:selected-category ssb:current-browser-system))
@@ -569,7 +569,7 @@ Return value is an alist with keys 'source, 'file, 'position, 'documentation"))
     (definitions (call-interactively 'system-browser-browse-definition))))
 
 (defun system-browser-refresh (&optional hard)
-  "Refresh the system browser contents and reset its layout."
+  "Refresh the system browser contents and reset its layout.  HARD."
   (interactive)
   (when hard
     (setq ssb:current-browser-system (make-instance (eieio-object-class ssb:current-browser-system))))
@@ -615,7 +615,7 @@ Return value is an alist with keys 'source, 'file, 'position, 'documentation"))
 
 (easy-menu-define
   system-browser-mode-menu system-browser-mode-map
-  "Menu for system-browser"
+  "Menu for system-browser."
   '("System Browser"
     ["Browse module..." system-browser-browse-module
      :help "Browse a module"]
@@ -693,6 +693,7 @@ Return value is an alist with keys 'source, 'file, 'position, 'documentation"))
            definition))))))
 
 (defun system-browser-cycle-selection ()
+  "Cycle selection."
   (interactive)
   (let ((letter (aref (this-command-keys) 0)))
     (cl-case ssb:system-browser-buffer-type
@@ -701,6 +702,7 @@ Return value is an alist with keys 'source, 'file, 'position, 'documentation"))
       (definitions (system-browser-cycle-next-definition letter)))))
 
 (defun system-browser-switch-next-buffer ()
+  "Switch to the next buffer."
   (interactive)
   (when (not (null ssb:system-browser-buffer-type))
     (let* ((windows '(modules categories definitions definition))
@@ -708,6 +710,7 @@ Return value is an alist with keys 'source, 'file, 'position, 'documentation"))
       (wlf:select ssb:wm next-window))))
 
 (defun system-browser-switch-prev-buffer ()
+  "Switch to the previous buffer."
   (interactive)
   (when (not (null ssb:system-browser-buffer-type))
     (let* ((windows '(modules categories definitions definition))

@@ -119,7 +119,8 @@ The second argument indicates if include system's direct dependencies or not."
     (sly-eval `(ssb:list-definitions ,module ,definition-type :include-internal-p ,ssb:list-internal-definitions))))
 
 (defun system-browser-browse-system (system-name)
-  "Browse ASDF system packages."
+  "Browse ASDF system packages.
+SYSTEM-NAME: system name"
   (interactive (list (sly-asdf-read-system-name)))
   (if (zerop (length system-name))
       (oset ssb:current-browser-system modules-list-function nil)
@@ -139,7 +140,7 @@ The second argument indicates if include system's direct dependencies or not."
     ;; Start Sly if needed
     (when (not (sly-connected-p))
       (when (or ssb:start-sly-automatically
-                (yes-or-no-p "Sly is not connected. Start? "))
+                (yes-or-no-p "Sly is not connected.  Start? "))
         (add-hook 'sly-connected-hook 'system-browser t)
         (sly))
       (cl-return-from system-browser))
@@ -158,4 +159,4 @@ The second argument indicates if include system's direct dependencies or not."
 
 (provide 'sly-system-browser)
 
-;;; system-browser-cl.el ends here
+;;; sly-system-browser.el ends here
